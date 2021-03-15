@@ -78,11 +78,12 @@ public enum VerticalEdge {
 }
 
 public enum HorizontalEdge {
-    case left, right
+    case left, right, center
     fileprivate func layoutValue() -> NSLayoutAttribute {
         switch (self) {
         case .left: return .left
         case .right: return .right
+        case .center: return .centerX
         }
     }
 }
