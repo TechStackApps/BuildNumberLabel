@@ -40,7 +40,17 @@ public func create(
     ) -> BuildLabel
 {
     let label = BuildLabel()
+    label.text = getVersionAndBuildNumber()
+    label.font = font
+    label.backgroundColor = UIColor.clear
+    label.textColor = color
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.sizeToFit()
     
+    return label
+}
+
+public func getVersionAndBuildNumber(bundle: Bundle = Bundle.main) -> String {
     let items : [(name: String, value: String?)] = [
         (
             name: "version",
@@ -52,19 +62,10 @@ public func create(
         )
     ]
     
-    let versionString = items.compactMap({ item in
-        guard let value = item.value else { return nil }
+    return items.compactMap({ item in
+        guard let value = item.value else { return "" }
         return "\(item.name) \(value)"
     }).joined(separator: " ")
-    
-    label.text = versionString
-    label.font = font
-    label.backgroundColor = UIColor.clear
-    label.textColor = color
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.sizeToFit()
-    
-    return label
 }
 
 public enum VerticalEdge {
